@@ -20,12 +20,6 @@ class SIMULATION:
         self.robot.Prepare_To_Act()
 
     def Run(self):
-        # frontLegSensorValues = numpy.zeros(c.numIterations)
-        # backLegSensorValues = numpy.zeros(c.numIterations)
-        # frontLegMotorValues = numpy.zeros(c.numIterations)
-        # backLegMotorValues = numpy.zeros(c.numIterations)
-
-
         
        
         for i in range(1000):

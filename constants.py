@@ -1,8 +1,8 @@
 import numpy
 
-numIterations = 1000
-t = 1/240
-maxForceMotors = 300
+numIterations = 5000
+t = 1/1000
+maxForceMotors = 100
 
 #front
 f_amplitude = numpy.pi/3
