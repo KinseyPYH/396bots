@@ -1,7 +1,7 @@
 import numpy
 
 numIterations = 1000
-t = 1/60
+t = 1/240
 maxForceMotors = 300
 
 #front

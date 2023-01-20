@@ -31,10 +31,11 @@ class SIMULATION:
         for i in range(1000):
           p.stepSimulation()
           self.robot.Sense(i)
+          self.robot.Think()
           self.robot.Act(self.robotId, i)
     
           time.sleep(c.t)
-          print(i)
+        #   print(i)
 
     def __del__(self):
           p.disconnect()

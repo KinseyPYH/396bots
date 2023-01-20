@@ -1,4 +1,5 @@
 import pyrosim.pyrosim as pyrosim
+from pyrosim.neuralNetwork import NEURAL_NETWORK
 from sensor import SENSOR
 from motor import MOTOR
 import constants as c
@@ -6,7 +7,8 @@ import numpy
 
 class ROBOT:
     def __init__(self):
-        pass
+        self.nn = NEURAL_NETWORK("brain.nndf")
+
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -15,26 +17,20 @@ class ROBOT:
 
     def Sense(self, t):
         for sensor in self.sensors:
-            # print(type(sensor))
-            # print(sensor)
             self.sensors[sensor].Get_Value(t)
     
-    def Prepare_To_Act(self):
-        self.amplitude = c.b_amplitude
-        self.frequency = c.b_frequency
-        self.offset = c.b_phaseOffset
-
+    def Prepare_To_Act(self):    
         self.motors = {}
-        
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
-            for i in range(c.numIterations):
-                if (jointName == b'Torso_BackLeg'):
-                    self.motors[jointName].motorValues[i] = self.amplitude * numpy.sin(self.frequency/2 * c.x[i] + self.offset)
-                else:
-                    self.motors[jointName].motorValues[i] = self.amplitude * numpy.sin(self.frequency * c.x[i] + self.offset)
 
     def Act(self, robot, i):
-        print(robot)
-        for motor in self.motors:
-            self.motors[motor].Set_Value(robot, i)
+        for neuronName in self.nn.Get_Neuron_Names():
+            if self.nn.Is_Motor_Neuron(neuronName):
+                jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
+                desiredAngle = self.nn.Get_Value_Of(neuronName)
+                self.motors[bytes(jointName, 'utf-8')].Set_Value(robot, desiredAngle)
+
+    def Think(self):
+        self.nn.Update()
+        self.nn.Print()
