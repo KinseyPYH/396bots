@@ -1,7 +1,7 @@
 import numpy
 
-numIterations = 5000
-t = 1/1000
+numIterations = 700
+t = 1/10000
 maxForceMotors = 100
 
 #front
@@ -13,5 +13,14 @@ b_amplitude = numpy.pi/3
 b_frequency = 10
 b_phaseOffset = 0
 
-x = numpy.linspace(0, 2*numpy.pi, numIterations)
+x1 = numpy.linspace(0, 2*numpy.pi, numIterations)
 
+numberOfGenerations = 30
+
+
+length = 1
+width = 1
+height = 1
+x = 0
+y = 0
+z = 0.5
