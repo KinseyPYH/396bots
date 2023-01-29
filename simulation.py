@@ -7,7 +7,8 @@ import numpy
 from robot import ROBOT
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
+        self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
         else:
@@ -17,18 +18,18 @@ class SIMULATION:
         p.setGravity(0,0,-9.8)
         self.planeId = p.loadURDF("plane.urdf")
         p.loadSDF("world.sdf")
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
         self.robot.Prepare_To_Sense()
         self.robot.Prepare_To_Act()
 
     def Run(self):
-        for i in range(c.numIterations):
-          p.stepSimulation()
-          self.robot.Sense(i)
-          self.robot.Think()
-          self.robot.Act(self.robot, i)
-    
-          time.sleep(c.t)
+            for i in range(c.numIterations):
+                p.stepSimulation()
+                self.robot.Sense(i)
+                self.robot.Think()
+                self.robot.Act(self.robot, i)
+                if self.directOrGUI == 'GUI':
+                    time.sleep(c.t)
         #   print(i)
 
     def Get_Fitness(self):

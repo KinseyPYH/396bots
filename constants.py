@@ -1,6 +1,6 @@
 import numpy
 
-numIterations = 700
+numIterations = 2000
 t = 1/10000
 maxForceMotors = 100
 
@@ -15,8 +15,8 @@ b_phaseOffset = 0
 
 x1 = numpy.linspace(0, 2*numpy.pi, numIterations)
 
-numberOfGenerations = 30
-
+numberOfGenerations = 10
+populationSize = 10
 
 length = 1
 width = 1
