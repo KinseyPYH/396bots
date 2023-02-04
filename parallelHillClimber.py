@@ -75,6 +75,7 @@ class PARALLEL_HILLCLIMBER:
                 bestFitness = self.parents[parent].fitness
                 bestParent = self.parents[parent]
         bestParent.Start_Simulation('GUI')
+        print("Best fitness: " + str(bestFitness))
         # self.child.Evaluate('GUI')
     
     def Evaluate(self, solutions):

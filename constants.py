@@ -24,3 +24,7 @@ height = 1
 x = 0
 y = 0
 z = 0.5
+
+numSensorNeurons = 9
+numMotorNeurons = 8
+motorJointRange = 0.2
