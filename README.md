@@ -4,7 +4,7 @@ My project is a Biped Stair Climber. It has a torso (moreso a hip), 2 thighs (le
 
 It consists of motors for the torsos, thighs, and feet, which move based on sensor neurons. The sensor neurons are on each link. 
 
-The motors on the thighs, calves, and feet have different angles of movement and more force. This is intentional to somewhat mimic the behavior of humanoid bipeds, where feet have less degree of movement, and thighs and calves are stronger and have more angle of movement than feet. 
+The motors on the thighs, calves, and feet have different angles of movement and different force. This is intentional to somewhat mimic the behavior of humanoid bipeds, where feet have less degree of movement, and thighs and calves are stronger (more motor force) and have more angle of movement than feet. 
 
 The objective is to reach the top of the 6-step flight of stairs. Originally, the fitness function simply consisted of maximising the greatest Z coordinate the robot encounters throughout the simulation. However, this result in either standing as straight as possible or jumping with no objective. Also, the stairs increase in height toward the +Y direction. Thus, the fitness function consists of two parts: the Y coordinate and the Z coordinate. 
 
