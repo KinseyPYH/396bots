@@ -15,7 +15,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.GUI)
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.setGravity(0,0,-9.8)
+        p.setGravity(0,0,-10)
         self.planeId = p.loadURDF("plane.urdf")
         p.loadSDF("world.sdf")
         self.robot = ROBOT(solutionID)

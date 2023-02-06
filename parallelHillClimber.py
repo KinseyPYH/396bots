@@ -26,57 +26,47 @@ class PARALLEL_HILLCLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        # self.child.Evaluate('DIRECT')
         self.Print()
         self.Select()
 
     def Spawn(self):
         self.children = {}
-
-        # self.nextAvailableID += 1
         for parent in self.parents:
             self.children[parent] = copy.deepcopy(self.parents[parent])
             self.children[parent].Set_ID(self.nextAvailableID)
             self.nextAvailableID += 1
-
-
-        # self.child = copy.deepcopy(self.parent)
-        # self.nextAvailableID += 1
-        # self.child.Set_ID(self.nextAvailableID)
-        # self.nextAvailableID += 1
-
     def Mutate(self):
         for child in self.children:
             self.children[child].Mutate()
-        # self.child.Mutate()
 
 
     def Select(self):
 
         for parent in self.parents:
-            # print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
-            if (self.parents[parent].fitness > self.children[parent].fitness):
+            calcFitness = self.parents[parent].fitness[0]*0.65 + self.parents[parent].fitness[1]*0.35
+            childFitness = self.children[parent].fitness[0]*0.65 + self.children[parent].fitness[1]*0.35
+            if childFitness > calcFitness:
                 self.parents[parent] = self.children[parent]
-
-        # if (self.parent.fitness > self.child.fitness):
-        #     self.parent = self.child
 
     def Print(self):
         print("")
+        
         for parent in self.parents:
-            print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
+            calcFitness = self.parents[parent].fitness[0]*0.65 + self.parents[parent].fitness[1]*0.35
+            childFitness = self.children[parent].fitness[0]*0.65 + self.children[parent].fitness[1]*0.35
+            print("parent fitness: " + str(calcFitness) + "->" + str(self.parents[parent].fitness) + ", children fitness: " + str(childFitness) + "->" + str(self.children[parent].fitness))
         print("")
 
     def Show_Best(self):
-        bestFitness = float('inf')
-        bestParent = None
+        bestFitness = self.parents[0].fitness[0]*0.65 + self.parents[0].fitness[1]*0.35
+        bestParent = self.parents[0]
         for parent in self.parents:
-            if self.parents[parent].fitness < bestFitness:
-                bestFitness = self.parents[parent].fitness
+            calcFitness = self.parents[parent].fitness[0]*0.65 + self.parents[parent].fitness[1]*0.35
+            if calcFitness > bestFitness:
+                bestFitness = calcFitness
                 bestParent = self.parents[parent]
         bestParent.Start_Simulation('GUI')
         print("Best fitness: " + str(bestFitness))
-        # self.child.Evaluate('GUI')
     
     def Evaluate(self, solutions):
         for parent in solutions:

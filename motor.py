@@ -11,12 +11,26 @@ class MOTOR:
         self.motorValues = numpy.zeros(c.numIterations)
 
     def Set_Value(self, robot, desiredAngle):
-        pyrosim.Set_Motor_For_Joint( 
+
+        if (self.jointName == "LeftCalf_LeftFoot" or self.jointName == "RightCalf_RightFoot"):
+            pyrosim.Set_Motor_For_Joint( 
+            bodyIndex = robot.robotId,
+            jointName = self.jointName,
+            controlMode = p.POSITION_CONTROL,
+            targetPosition = desiredAngle*0.8,
+            maxForce = c.maxForceMotors*0.7)
+
+        elif (self.jointName == "LeftThigh_LeftCalf" or self.jointName == "RightThigh_RightCalf"):
+            pyrosim.Set_Motor_For_Joint( 
             bodyIndex = robot.robotId,
             jointName = self.jointName,
             controlMode = p.POSITION_CONTROL,
             targetPosition = desiredAngle,
-            maxForce = c.maxForceMotors)
-
-    # def Save_Values(self):
-    #     numpy.save("data/" + self.jointName + ".npy", self.motorValues)
+            maxForce = c.maxForceMotors*1.5)
+        else:
+            pyrosim.Set_Motor_For_Joint( 
+                bodyIndex = robot.robotId,
+                jointName = self.jointName,
+                controlMode = p.POSITION_CONTROL,
+                targetPosition = desiredAngle,
+                maxForce = c.maxForceMotors*0.8)

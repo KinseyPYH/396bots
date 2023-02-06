@@ -1,30 +1,31 @@
 import numpy
 
-numIterations = 2000
-t = 1/10000
-maxForceMotors = 100
+#Iterations and Time per step
+numIterations = 6000
+t = 1/100000
 
-#front
-f_amplitude = numpy.pi/3
-f_frequency = 10
-f_phaseOffset = 0
-#back
-b_amplitude = numpy.pi/3
-b_frequency = 10
-b_phaseOffset = 0
+# HillClimber parameters
+numberOfGenerations = 1
+populationSize = 1
 
-x1 = numpy.linspace(0, 2*numpy.pi, numIterations)
+# torso dimensions
+body_length = 0.6
+body_width = 0.4
+body_height = 0.3
 
-numberOfGenerations = 10
-populationSize = 10
-
-length = 1
-width = 1
-height = 1
+# stair dimensions
+length = 15
+width = 1.5
+height = 0.125
 x = 0
 y = 0
-z = 0.5
+z = 0.25
+stairMass=1000
 
-numSensorNeurons = 9
-numMotorNeurons = 8
-motorJointRange = 0.2
+
+# Neurons and Motors
+numSensorNeurons = 7
+numMotorNeurons = 6
+
+maxForceMotors = 108
+motorJointRange = 1.5
