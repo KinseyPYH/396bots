@@ -15,8 +15,8 @@ b_phaseOffset = 0
 
 x1 = numpy.linspace(0, 2*numpy.pi, numIterations)
 
-numberOfGenerations = 10
-populationSize = 10
+numberOfGenerations = 1
+populationSize = 1
 
 length = 1
 width = 1
