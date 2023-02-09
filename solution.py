@@ -13,6 +13,18 @@ class SOLUTION:
         self.myID = nextAvailableID
         self.Create_World()
         self.Create_Body()
+
+
+        """
+        1. Randomly generate a number
+        2. Create array of sized random number
+        3. Create main (0)
+        3. For loop
+            3a. Create joint using i and i-1 [name it (i)_(i-1)]
+            3b. Create link of "i"
+        4. Add sensor randomly (greater than 0.5) by looping through array
+        5. 
+        """
       
     def Evaluate(self, directOrGUI):
         self.Create_Brain()
