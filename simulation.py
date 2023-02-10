@@ -8,6 +8,7 @@ from robot import ROBOT
 
 class SIMULATION:
     def __init__(self, directOrGUI, solutionID):
+        print("Start simulation")
         self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -15,6 +16,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.GUI)
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
+
         p.setGravity(0,0,-9.8)
         self.planeId = p.loadURDF("plane.urdf")
         p.loadSDF("world.sdf")

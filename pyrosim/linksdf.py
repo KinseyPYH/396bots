@@ -6,11 +6,13 @@ from pyrosim.collisionsdf    import COLLISION_SDF
 
 from pyrosim.visualsdf       import VISUAL_SDF
 
+from pyrosim.material        import MATERIAL
+
 from pyrosim.commonFunctions import Save_Whitespace
 
 class LINK_SDF:
 
-    def __init__(self,name,pos,size):
+    def __init__(self,name,pos,size, color):
 
         self.name = name
 
@@ -23,6 +25,8 @@ class LINK_SDF:
         self.collision = COLLISION_SDF(self.geometry)
 
         self.visual    = VISUAL_SDF(self.geometry)
+
+        self.material = MATERIAL(color)
 
     def Save(self,f):
 

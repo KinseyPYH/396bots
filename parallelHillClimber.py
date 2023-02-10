@@ -40,11 +40,6 @@ class PARALLEL_HILLCLIMBER:
             self.nextAvailableID += 1
 
 
-        # self.child = copy.deepcopy(self.parent)
-        # self.nextAvailableID += 1
-        # self.child.Set_ID(self.nextAvailableID)
-        # self.nextAvailableID += 1
-
     def Mutate(self):
         for child in self.children:
             self.children[child].Mutate()
@@ -58,8 +53,6 @@ class PARALLEL_HILLCLIMBER:
             if (self.parents[parent].fitness > self.children[parent].fitness):
                 self.parents[parent] = self.children[parent]
 
-        # if (self.parent.fitness > self.child.fitness):
-        #     self.parent = self.child
 
     def Print(self):
         print("")
