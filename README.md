@@ -1,6 +1,6 @@
 # CS396 HW6: Generate Random 1D Creature Morphologies
 
-This assignment create a program that generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a random number of randomly shaped links with random sensor placement along the chain.
+This assignment creates a program that generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a random number of randomly shaped links with random sensor placement along the chain.
 
 Links with and without sensors are respectively colored green and blue.
 
