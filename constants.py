@@ -16,6 +16,10 @@ y = 0
 z = 0.5
 
 
+# Joints
+maxNumLinks = 15
+
+
 # Neurons and Motors
 numSensorNeurons = 9
 numMotorNeurons = 8

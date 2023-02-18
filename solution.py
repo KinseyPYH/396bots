@@ -4,7 +4,7 @@ import numpy as np
 import random
 import constants as c
 import time
-
+from operator import add
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
@@ -49,6 +49,79 @@ class SOLUTION:
 
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
+
+
+
+
+        
+
+
+
+        directionsToGrow = ['up',' down', 'left', 'right', 'front', 'back']
+        directions = {
+            'up':    [0, 0, 1 ],
+            'down':  [0, 0, -1],
+            'left':  [-1, 0, 0],
+            'right': [1, 0, 0 ],
+            'front': [0, 1, 0 ],
+            'back':  [0, -1, 0],
+            
+        }
+
+        jointDirections = {
+            'up':    [0, 0, 1/2 ],
+            'down':  [0, 0, -1/2],
+            'left':  [-1, 0, 0],
+            'right': [1, 0, 0 ],
+            'front': [0, 1, 0 ],
+            'back':  [0, -1, 0],
+        }
+
+        self.totalNumLinks = np.random.randint(5, high=c.maxNumLinks)
+        self.sensorColors = []
+        for i in range(self.totalNumLinks):
+            randomNum = np.random.rand()
+            color = 'Blue'
+            if randomNum > 0.5:
+                color = 'Green'
+            self.sensorColors.append(color)
+        
+        self.currentLinks = []
+        length = np.random.rand() * c.maxSize + c.maxSize*0.01
+        width = np.random.rand() * c.maxSize + c.maxSize*0.01
+        height = np.random.rand() * c.maxSize + c.maxSize*0.01
+        pyrosim.Send_Cube(name="0", pos=[0,0,height/2 + c.maxSize] , size=[length, width, height], color=self.snakeSensorColors[0])
+        randomDirectionToGrow = directions[np.random.choice(directionsToGrow)]
+        jointPosition = [a*b for a,b in zip(randomDirectionToGrow, [length/2, width/2, height/2])]
+        jointPosition[2] += height/2 + c.maxSize
+        pyrosim.Send_Joint( name = "0_1" , parent= "0" , child = "1" , type = "revolute", position = jointPosition, jointAxis = "0 1 0")
+
+        linkObject = {
+            "name": "0",
+            "length": length,
+            "width": width,
+            "height": height,
+            "filled": {}, #set of up, down, left, right, front, back, means which part of this link is filled
+            "parentJointName": "", # empty means parent
+            "parentJointDirection": []
+        }
+        self.currentLinks.append(linkObject)
+
+        for i in range(1, self.totalNumLinks):
+            randomLinkObject = np.random.choice(self.currentLinks)
+            length = np.random.rand() * c.maxSize + c.maxSize*0.01
+            width = np.random.rand() * c.maxSize + c.maxSize*0.01
+            height = np.random.rand() * c.maxSize + c.maxSize*0.01
+            randomDirectionToGrow = directions[np.random.choice(directionsToGrow)]
+            linkPosition = [a*b for a,b in zip(randomDirectionToGrow, [length/2, width/2, height/2])]
+            pyrosim.Send_Cube(name=str(i), pos=[prevLength/2,0,0] , size=[length, width, height], color=self.sensorColors[i])
+            
+
+
+
+
+
+
 
         self.snakeRandomSize = np.random.randint(3, high=10) #random num from 0 to 10
 
