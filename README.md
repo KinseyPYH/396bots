@@ -21,8 +21,7 @@ Figure 2: No information about preceding blocks causes collision
 
 To overcome this, absolute positions of each block are stored. This is hardcoded for the root link and joint. Then, when I create each subsequent link and block pair, the new joint's relative position to its upstream joint is calculated first. The new link's relative position is simply taken from its dimensions. The new link's absolute dimensions, though, are calculated from its parent's absolute position, the new joint's relative position, and the new link's relative position. With the absolute position of each block stored, object collision detection is now quite simple. The absolute position calculation is shown below.
 
-
-![alt text](readmeImages/AbsPos.jpg)
+![alt text](readmeImages/AbsPos.jpeg)
 Figure 3: Absolute position calculation using relative positions
 
 This process is repeated until the number of blocks desired has been generated. 
