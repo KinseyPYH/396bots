@@ -1,8 +1,8 @@
 import numpy
 
 #Iterations and Time per step
-numIterations = 5000
-t = 1/10000
+numIterations = 2000
+t = 1/50000
 
 # HillClimber parameters
 numberOfGenerations = 0
@@ -19,12 +19,12 @@ z = 0.5
 # Joints
 maxNumLinks = 15
 
-
 # Neurons and Motors
 numSensorNeurons = 0
 numMotorNeurons = 0
 
-maxForceMotors = 80
-motorJointRange = 0.6
+maxForceMotors = 100
+motorJointRange = 1
 
 maxSize = 1
+minLinkSize = maxSize*0.5
