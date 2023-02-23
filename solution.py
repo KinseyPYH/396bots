@@ -95,7 +95,8 @@ class SOLUTION:
             "filled": [], #set of up, down, left, right, front, back, means which part of this link is filled
             "parentJointName": "", # empty means parent
             "parentJointDirection": "",
-            "grewToward": None
+            "grewToward": None,
+            "children": []
         }
         randomDirectionToGrow = np.random.choice(directionsToGrow)
         randomDirectionToGrowCoord = directions[randomDirectionToGrow]
@@ -122,12 +123,12 @@ class SOLUTION:
             "filled": [parentJointDirections[randomDirectionToGrow]], #set of up, down, left, right, front, back, means which part of this link is filled
             "parentJointName": "0_1", # empty means parent
             "parentJointDirection": parentJointDirections[randomDirectionToGrow],
-            'grewToward': randomDirectionToGrow
+            'grewToward': randomDirectionToGrow,
         }
 
         ## also need to fill in parent object's filled
         self.currentLinks[0]['filled'].append(randomDirectionToGrow)
-
+        self.currentLinks[0]['children'].append(linkObject)
         ## add new object into links list
         self.currentLinks.append(linkObject)
         
