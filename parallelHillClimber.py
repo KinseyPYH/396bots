@@ -47,7 +47,6 @@ class PARALLEL_HILLCLIMBER:
 
 
     def Select(self):
-
         for parent in self.parents:
             # print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
             if (self.parents[parent].fitness > self.children[parent].fitness):
