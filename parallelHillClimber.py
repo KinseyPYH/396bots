@@ -8,9 +8,12 @@ class PARALLEL_HILLCLIMBER:
 
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
+        os.system("rm body*.urdf")
+        # os.system("rm allBestFitness0.txt")
 
         self.parents = {}
         self.nextAvailableID = 0
+        self.children = {}
 
         for i in range(c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -42,7 +45,8 @@ class PARALLEL_HILLCLIMBER:
 
     def Mutate(self):
         for child in self.children:
-            self.children[child].Mutate()
+            ch = self.children[child]
+            ch.Mutate()
         # self.child.Mutate()
 
 
@@ -51,6 +55,17 @@ class PARALLEL_HILLCLIMBER:
             # print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
             if (self.parents[parent].fitness > self.children[parent].fitness):
                 self.parents[parent] = self.children[parent]
+                os.system("rm brain" + str(self.parents[parent].myID) + ".nndf")
+            else:
+                os.system("rm brain" + str(self.children[parent].myID) + ".nndf")
+        
+        bestfit = float('inf')
+        for parent in self.parents:
+            if self.parents[parent].fitness < bestfit:
+                bestfit = self.parents[parent].fitness
+        f = open("allBestFitness0.txt", "a")
+        f.write(str(bestfit) + '\n')
+        f.close()
 
 
     def Print(self):
@@ -65,18 +80,18 @@ class PARALLEL_HILLCLIMBER:
         for parent in self.parents:
             if self.parents[parent].fitness < bestFitness:
                 bestFitness = self.parents[parent].fitness
+                print("FITNESS WTF: " + str(bestFitness))
                 bestParent = self.parents[parent]
+        print("Best fitness-  "+ str(bestParent.myID) + ": " + str(bestFitness))
         bestParent.Start_Simulation('GUI')
-        print("Best fitness: " + str(bestFitness))
         # self.child.Evaluate('GUI')
     
     def Evaluate(self, solutions):
-        for parent in solutions:
-            # self.parents[parent].Evaluate('GUI')
-            solutions[parent].Start_Simulation('DIRECT')
-            # solutions[parent].Start_Simulation('GUI')
+        print("PHC Evaluate: Length of children: " + str(len(solutions)))
 
-        # self.parent.Evaluate('GUI')
+        for parent in solutions:
+            solutions[parent].Start_Simulation('DIRECT')
+
 
         for parent in solutions:
             solutions[parent].Wait_For_Simulation_To_End()

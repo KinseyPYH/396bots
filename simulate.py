@@ -11,4 +11,4 @@ solutionID = sys.argv[2]
 
 simulate = SIMULATION(directOrGUI, solutionID)
 simulate.Run()
-simulate.Get_Fitness()
+# simulate.Get_Fitness()

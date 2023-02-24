@@ -5,6 +5,7 @@ import time
 import constants as c
 import numpy
 from robot import ROBOT
+import os
 
 class SIMULATION:
     def __init__(self, directOrGUI, solutionID):
@@ -22,21 +23,25 @@ class SIMULATION:
         self.planeId = p.loadURDF("plane.urdf")
         p.loadSDF("world.sdf")
         self.robot = ROBOT(solutionID)
+        self.solutionID = solutionID
         self.robot.Prepare_To_Sense()
         self.robot.Prepare_To_Act()
 
     def Run(self):
-            for i in range(c.numIterations):
-                p.stepSimulation()
-                self.robot.Sense(i)
-                self.robot.Think()
-                self.robot.Act(self.robot, i)
-                if self.directOrGUI == 'GUI':
-                    time.sleep(c.t)
+        for i in range(c.numIterations):
+            p.stepSimulation()
+            self.robot.Sense(i)
+            self.robot.Think()
+            self.robot.Act(self.robot, i)
+            if self.directOrGUI == 'GUI':
+                time.sleep(c.t)
+        self.robot.Get_Fitness()
+        bodyFileName = "body" + str(self.solutionID) + ".urdf"
+        os.system("rm " + bodyFileName)
         #   print(i)
 
-    def Get_Fitness(self):
-        self.robot.Get_Fitness()
+    # def Get_Fitness(self):
+        # self.robot.Get_Fitness()
 
 
     def __del__(self):

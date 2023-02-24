@@ -2,11 +2,11 @@ import numpy
 
 #Iterations and Time per step
 numIterations = 5000
-t = 1/500
+t = 1/1000
 
 # HillClimber parameters
-numberOfGenerations = 1
-populationSize = 1
+numberOfGenerations = 200
+populationSize = 10
 
 length = 1
 width = 1
