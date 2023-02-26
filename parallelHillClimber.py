@@ -67,7 +67,7 @@ class PARALLEL_HILLCLIMBER:
         for parent in self.parents:
             if self.parents[parent].fitness < bestfit:
                 bestfit = self.parents[parent].fitness
-        f = open("allBestFitness2.txt", "a")
+        f = open("allBestFitness" + str(c.seed) + ".txt", "a")
         f.write(str(bestfit) + '\n')
         f.close()
 

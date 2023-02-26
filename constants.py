@@ -29,3 +29,5 @@ motorJointRange = 1
 
 maxSize = 0.75
 minLinkSize = maxSize*0.5
+
+seed = 0
