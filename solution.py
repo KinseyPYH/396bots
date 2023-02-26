@@ -6,7 +6,7 @@ import constants as c
 import time
 from operator import add
 
-np.random.seed(0)
+np.random.seed(2)
 
 directionsToGrow = ['up', 'down', 'left', 'right', 'front', 'back']
 directions = {

@@ -5,7 +5,7 @@ numIterations = 5000
 t = 1/1000
 
 # HillClimber parameters
-numberOfGenerations = 200
+numberOfGenerations = 500
 populationSize = 10
 
 length = 1
@@ -18,13 +18,13 @@ startHeight = 3
 
 
 # Joints
-maxNumLinks = 7
+maxNumLinks = 12
 
 # Neurons and Motors
 numSensorNeurons = 0
 numMotorNeurons = 0
 
-maxForceMotors = 100
+maxForceMotors = 50
 motorJointRange = 1
 
 maxSize = 0.75

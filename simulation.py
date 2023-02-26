@@ -36,8 +36,7 @@ class SIMULATION:
             if self.directOrGUI == 'GUI':
                 time.sleep(c.t)
         self.robot.Get_Fitness()
-        bodyFileName = "body" + str(self.solutionID) + ".urdf"
-        os.system("rm " + bodyFileName)
+        
         #   print(i)
 
     # def Get_Fitness(self):

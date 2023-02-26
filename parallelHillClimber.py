@@ -54,16 +54,20 @@ class PARALLEL_HILLCLIMBER:
         for parent in self.parents:
             # print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
             if (self.parents[parent].fitness > self.children[parent].fitness):
-                self.parents[parent] = self.children[parent]
                 os.system("rm brain" + str(self.parents[parent].myID) + ".nndf")
+                bodyFileName = "body" + str(self.parents[parent].myID) + ".urdf"
+                os.system("rm " + bodyFileName)
+                self.parents[parent] = self.children[parent]
             else:
                 os.system("rm brain" + str(self.children[parent].myID) + ".nndf")
+                bodyFileName = "body" + str(self.children[parent].myID) + ".urdf"
+                os.system("rm " + bodyFileName)
         
         bestfit = float('inf')
         for parent in self.parents:
             if self.parents[parent].fitness < bestfit:
                 bestfit = self.parents[parent].fitness
-        f = open("allBestFitness0.txt", "a")
+        f = open("allBestFitness2.txt", "a")
         f.write(str(bestfit) + '\n')
         f.close()
 
@@ -71,7 +75,7 @@ class PARALLEL_HILLCLIMBER:
     def Print(self):
         print("")
         for parent in self.parents:
-            print("parent fitness: " +  str(self.parents[parent].fitness) + ", children fitness: " + str(self.children[parent].fitness))
+            print("parent" + str(self.parents[parent].myID) + " fitness: " +  str(self.parents[parent].fitness) + ", children " + str(self.children[parent].myID) + " fitness: " + str(self.children[parent].fitness))
         print("")
 
     def Show_Best(self):
