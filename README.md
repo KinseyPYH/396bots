@@ -17,7 +17,7 @@ Figure 1: Fitness Levels of Evolved Creatures
 
 The best creature was from seed 0, moving -37.32 in the x-direction.
 
-The video of some trials can be seen here: https://youtu.be/J7hXnJ7vBi8
+The video of some trials can be seen here: https://youtu.be/Cm_hipJ8cfM
 
 
 # How the program mutates 
