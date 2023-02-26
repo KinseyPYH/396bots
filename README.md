@@ -62,7 +62,7 @@ Figure 4: Randomly selecting one link to mutate
 
 The main file is search.py. I exclusively used python3.7 for this project.
 
-You can run 1 generation of this randomly shaped creature (generation 0, completely random) with:
+You can run 500 generations (each with 10 children) of this a randomly shaped creature with:
 
 ``` 
 
