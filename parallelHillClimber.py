@@ -92,7 +92,7 @@ class PARALLEL_HILLCLIMBER:
             self.bestfitnessSoFar = bestfit
             self.listBestFitnessSoFar.append(bestSolution.myID)
             f = open("increasesInFitness" + str(c.seed) + ".txt", "a")
-            f.write(str(self.bestfitnessSoFar) + " " + str(bestSolution.myID) + '\n')
+            f.write("Fitness: " + str(self.bestfitnessSoFar) + " generation: " + str(self.currentGeneration) + " ID: " + str(bestSolution.myID) + '\n')
             f.close()
 
         f = open("allBestFitness" + str(c.seed) + ".txt", "a")
