@@ -138,6 +138,7 @@ class PARALLEL_HILLCLIMBER:
         if (bestfit < self.bestfitnessSoFar):
             self.bestfitnessSoFar = bestfit
             self.listBestFitnessSoFar.append(bestSolution.myID)
+            self.createPickle = True
             f = open(self.foldername + "/increasesInFitness" + str(self.seed) + ".txt", "a")
             f.write("Fitness: " + str(self.bestfitnessSoFar) + " generation: " + str(self.currentGeneration) + " ID: " + str(bestSolution.myID) + '\n')
             f.close()
