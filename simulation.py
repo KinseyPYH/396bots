@@ -8,7 +8,7 @@ from robot import ROBOT
 import os
 
 class SIMULATION:
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI, seednum, solutionID, brain_fileName, body_filename):
         print("Start simulation")
         self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
@@ -18,12 +18,11 @@ class SIMULATION:
             p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-
         p.setGravity(0,0,-9.8)
         self.planeId = p.loadURDF("plane.urdf")
         p.loadSDF("world.sdf")
-        self.robot = ROBOT(solutionID)
         self.solutionID = solutionID
+        self.robot = ROBOT(seednum, solutionID, brain_fileName, body_filename)
         self.robot.Prepare_To_Sense()
         self.robot.Prepare_To_Act()
 

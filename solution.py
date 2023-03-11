@@ -6,7 +6,6 @@ import constants as c
 import time
 from operator import add
 
-np.random.seed(c.seed)
 
 directionsToGrow = ['up', 'down', 'left', 'right', 'front', 'back']
 directions = {
@@ -29,21 +28,28 @@ parentJointDirections = {
     'back':  'front',
 }
 
+# np.random.seed(11)
+
 class SOLUTION:
-    def __init__(self, nextAvailableID):
-        # self.weights = np.random.rand(c.numSensorNeurons, c.numMotorNeurons)
-        # self.weights = (self.weights * 2) - 1 
+    def __init__(self, nextAvailableID, seednum):
+        self.seednum = int(seednum)
+        # print("seed: " + str(np.random.randint(5)))
         self.myID = nextAvailableID
+
+        self.foldername =  "seed%s" %(self.seednum)
+        try: 
+            os.makedirs(self.foldername)
+        except:
+            pass
         self.Create_World()
         self.Create_Body()
-        # os.system("rm body.urdf")
 
         
       
     def Evaluate(self, directOrGUI):
         # self.Rebuild_Body()
         self.Create_Brain()
-        os.system('python3.7 simulate.py ' + directOrGUI + " " + str(self.myID) + " 2&>1 &")
+        os.system('python3 simulate.py ' + directOrGUI + " " + str(self.seednum) + " " + str(self.myID) + " useless useless 2&>1 &")
         fitnessFileName = "fitness" + str(self.myID) + ".txt"
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
@@ -56,10 +62,10 @@ class SOLUTION:
         # self.Create_Body()
         self.Rebuild_Body()
         self.Create_Brain()
-        os.system('python3.7 simulate.py ' + directOrGUI + " " + str(self.myID))# + " 2&>1 &")
+        os.system('python3 simulate.py ' + directOrGUI + " " + str(self.seednum) + " " + str(self.myID) + " useless useless")# + " 2&>1 &")
 
     def Wait_For_Simulation_To_End(self):
-        fitnessFileName = "fitness" + str(self.myID) + ".txt"
+        fitnessFileName = self.foldername + "/fitness" + str(self.myID) + ".txt"
 
         while not os.path.exists(fitnessFileName):
             # print(self.myID)
@@ -70,7 +76,7 @@ class SOLUTION:
         os.system("rm " + fitnessFileName)
 
     def Create_World(self):
-        pyrosim.Start_SDF("world.sdf")
+        pyrosim.Start_SDF(self.foldername + "/world.sdf")
         pyrosim.Send_Cube(name="Box1", pos=[-10,5,c.height/2] , size=[c.length, c.width, c.height])
         pyrosim.Send_Cube(name="Box2", pos=[-5,5,c.height/2] , size=[c.length, c.width, c.height])
         pyrosim.Send_Cube(name="Box3", pos=[-1,5,c.height/2] , size=[c.length, c.width, c.height])
@@ -82,14 +88,6 @@ class SOLUTION:
 
 
         self.totalNumLinks = np.random.randint(6, high=c.maxNumLinks)
-        # self.sensorColors = []
-        # for i in range(self.totalNumLinks):
-        #     randomNum = np.random.rand()
-        #     color = 'Blue'
-        #     if randomNum > 0.5:
-        #         color = 'Green'
-        #     self.sensorColors.append(color)
-        
         self.currentLinks = []
         self.allJoints = []
         length = np.random.rand() * c.maxSize + c.minLinkSize 
@@ -321,7 +319,7 @@ class SOLUTION:
         return False
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
+        pyrosim.Start_NeuralNetwork(self.foldername + "/brain" + str(self.myID) + ".nndf")
         sensorNeuronCount = 0
         for i in range(len(self.currentLinks)):
             if self.currentLinks[i]["color"] == 'Green':
@@ -356,7 +354,7 @@ class SOLUTION:
     def Rebuild_Body(self):
 
         # pyrosim.Start_URDF("body.urdf")
-        pyrosim.Start_URDF("body" + str(self.myID) + ".urdf")
+        pyrosim.Start_URDF(self.foldername + "/body" + str(self.myID) + ".urdf")
 
         # p.loadURDF("body" + str(solutionID) + ".urdf")
 
@@ -373,7 +371,7 @@ class SOLUTION:
             pyrosim.Send_Cube(name=str(currLink['name']), pos=currLink['RelPosFromParent'], size=currLink['LWH'], color=currLink['color'])
         
         pyrosim.End()
-        self.printLinks()
+        # self.printLinks()
         # pass
 
         
@@ -442,7 +440,7 @@ class SOLUTION:
         ## for use when Send_Joint()    
             # go from one edge (joint) of cube to another edge (joint) through the center of cube
         else:
-            print(randomParentLink)
+            # print(randomParentLink)
             centerofParentLinkRelative = [float(a)*(b/2) for a,b in zip(directions[randomParentLink['grewToward']], randomParentLWH)]
             goToNewJointAdd= [(a/2)*float(b) for a,b in zip(randomParentLWH, directions[randomDirectionToGrow])]
             FromPrevJointToNewJointRelPosition = [a + b for a,b in zip(centerofParentLinkRelative, goToNewJointAdd)]
@@ -619,14 +617,14 @@ class SOLUTION:
 
             childrenLinks.pop(0)
         
-        print("MUTATE LINKS ALL JOINTS")
-        print(self.allJoints)
+        # print("MUTATE LINKS ALL JOINTS")
+        # print(self.allJoints)
 
         # print("TO DELETE LINKS: ")
         # print(toDeleteLinks)
-        print("NAMES OF DELETED LINKS")
-        print(deletedLinkNames)
-        print("END MUTATE")
+        # print("NAMES OF DELETED LINKS")
+        # print(deletedLinkNames)
+        # print("END MUTATE")
 
         for link in reversed(toDeleteLinks):
             for l in self.currentLinks:
@@ -835,6 +833,7 @@ class SOLUTION:
 
     def Set_ID(self, nextAvailableID):
         self.myID = nextAvailableID
+        print(self.myID)
 
     def printLinks(self):
         print('====Printing Links====')

@@ -8,12 +8,18 @@ import numpy
 import pybullet as p
 
 class ROBOT:
-    def __init__(self, solutionID):
+    def __init__(self, seednum, solutionID, inputbrain_filename, inputbody_filename):
         self.solutionID = solutionID
-        self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
-        # os.system("rm brain" + str(solutionID) + ".nndf")
-        bodyFileName = "body" + str(solutionID) + ".urdf"
-        self.robotId = p.loadURDF(bodyFileName)
+        self.seednum = seednum
+        self.foldername =  "seed%s" %(self.seednum)
+        
+        if inputbrain_filename:
+            self.nn = NEURAL_NETWORK(inputbrain_filename)
+            self.robotId = p.loadURDF(inputbody_filename)
+        else:
+            self.nn = NEURAL_NETWORK(self.foldername + "/brain" + str(solutionID) + ".nndf")
+            bodyFileName = self.foldername + "/body" + str(solutionID) + ".urdf"
+            self.robotId = p.loadURDF(bodyFileName)
         
         # self.robotId = p.loadURDF("body.urdf")
 
@@ -54,5 +60,5 @@ class ROBOT:
         f = open(writeToFileName, "w")
         f.write(str(self.xCoordinateofLinkZero))
         f.close()
-        os.system("mv " + writeToFileName + " fitness" + str(self.solutionID) + ".txt")
+        os.system("mv " + writeToFileName + " " + self.foldername + "/fitness" + str(self.solutionID) + ".txt")
         # exit()

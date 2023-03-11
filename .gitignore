@@ -3,3 +3,5 @@ fitness*.txt
 venv/
 allBestFitness*.txt
 body*.urdf
+*.pickle
+seed*
