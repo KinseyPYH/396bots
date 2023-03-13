@@ -273,6 +273,7 @@ class SOLUTION:
             if self.currentLinks[i]["color"] == 'Green':
                 sensorNeuronCount += 1 
             if sensorNeuronCount == 0 and i == (len(self.currentLinks) - 1):
+                self.currentLinks[i]["color"] = 'Green'
                 sensorNeuronCount += 1 
 
         self.numSensorNeurons = sensorNeuronCount
