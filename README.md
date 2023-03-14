@@ -61,6 +61,7 @@ This is a severe mutation. This mutation chooses one link to be randomly generat
 
 <!-- ![alt text](readmeImages/theFourMutations.jpeg) -->
 <img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/theFourMutations.jpeg" alt= “” width="550" height="800">
+
 Figure 4: Four different types of mutations
 
 
@@ -70,18 +71,18 @@ Figure 4: Four different types of mutations
 Each trial had 500 generations of 10 children. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
 
 ![alt text](readmeImages/newFitnessLevels.png)
-Figure 4: Fitness Levels of Evolved Creatures
+Figure 5: Fitness Levels of Evolved Creatures
 
-Here is a video/gif showing random creatures (the primordial soup) versus selected creatures: <insert video here>
+Here is a gif showing random creatures (the primordial soup) versus selected creatures: <img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/WorstvsBest.gif" alt= “” width="600" height="400">
 
-There were 4 seeds that stood out: Seeds 1, 5, 9, 11, shown in this video: <insert video here>
+There were 4 seeds that stood out: Seeds 1, 5, 9, 11, but the best creature was from seed 9, moving -35.27 units in the x-direction. 
 
-The best creature was from seed 9, moving -35.27 units in the x-direction. Here is a video showing each mutation that *improved* fitness for the seed 9 trial: <insert video here>
+Here is a video showing each mutation that *improved* fitness for the seed 9 trial: <insert video here>
 
-Figure 4 is a graphic showing the differences between each mutation that improved the species' fitness levels for the seed 9 trial. 
+Figure 6 is a graphic showing the differences between each mutation that improved the species' fitness levels for the seed 9 trial. 
 
 ![alt text](readmeImages/GoodMutationsSeed9.jpeg)
-Figure 4: Mutations that improved fitness levels of seed 9
+Figure 6: Mutations that improved fitness levels of seed 9
 
 For a video explanation, see this 2-minute summary video: <insert final video>
 
