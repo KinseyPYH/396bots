@@ -9,8 +9,8 @@ Links with and without sensors are respectively colored green and blue.
 [Fitness Function](#fit)
 
 
-<a name="fit"/>
-## Fitness function 
+<a name="fit"></a>
+# Fitness function 
 Each generated creature is placed in a simulation world and its fitness by the end of the simulation is recorded. 
 
 The fitness function for this creature and its ancestors is to minimise the X-coordinate by the end of the simulation. Essentially, it is maximising distance travelled in the negative X-direction. 
@@ -20,6 +20,7 @@ The fitness function for this creature and its ancestors is to minimise the X-co
 
 Figure 0: Fitness function
 
+<a name="body"></a>
 # Body Generation
 The body is initially generated a randomly generated (shape and size) block. Then, a random series of randomly generated links (blocks) will be added to the root block and each subsequently added block. Figure 1 demonstrates the genotype and possible phenotype of a creature.
 
@@ -28,7 +29,7 @@ Figure 1: Genotype and phenotype of creature
 
 There is a range of sizes allowed for the creature: from 6 to 12. Joints between blocks have randomised axes in the x and y direction. Collision detection is performed such that no unnatural body parts are generated. Collision detection is detailed in Appendix A. 
 
-
+<a name="connect"></a>
 # Sensor and Motor Connection
 In pybullet, links can be sensors and joints can be motorised in their axis of rotation. We can utilise this to help bodies move. Each link is given a random 50-50 chance of being a sensor. Each joint is also given a 50-50 chance of being a motorised joint. The goal of this is to remove any human constructs of where to place sensors and motors and let natural selection occur. Every sensor is also connected to every neuron through a synapse. This is to mimic animal behavior (like when a limb touches something extremely hot, the entire body will move in response, or when moving forward, the left leg steps and the right leg will step in response). However, each synapse is given a different weight, so that different sensors will affect a motor more or less severely. This means that any sensor can have an affect (even negligible) on any motor and, therefore, joint. Figure 3 shows the connections made. 
 
@@ -37,11 +38,13 @@ In pybullet, links can be sensors and joints can be motorised in their axis of r
 
 Figure 2: Neuron, motor, joint connections on any creature
 
+<a name="evo"></a>
 # Evolution
 Evolution occurs by using the parent and applying a mutation function to its body and regenerating it as the child. Then, the child will run through the simulation again and the fitness at the end is recorded. If it has travelled further (smaller X value) than its parent, it will replace the parent as the better creature to be used to evolve off of. 
 
 This program runs 500 generations with 10 parents. Each parent will have a child. As mentioned, if the child performs better, the child will become the new parent that will be the ancestor of subsequent generations. If the child performs worse, the parent remains. 
 
+<a name="methods"></a>
 # Methods: How the program mutates 
 
 The program generates a random creature of initial size [6, 12). The random body generation algorithm is detailed in Appendix A. This section details the mutation function from parent to child generation. 
