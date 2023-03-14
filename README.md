@@ -42,7 +42,7 @@ This mutation adds one link to the creature. To do so, a child link is randomly 
 The links in the body are connected to each other via *one* joint. There are no ball and socket joints, so each "limb" will have one degree of movement. They are given one of two axes: [0 1 0] or [1 0 0].
 
 ![alt text](readmeImages/Joint_Axis.jpeg)
-Figure 5: Different possible axes
+Figure 3: Different possible axes
 
 This mutation function iterates through all joints in the creature's body and reassigns one of two axis randomly. They may receive the same axis or a new axis. 
 
@@ -55,8 +55,13 @@ This mutate simply randomly mutates neuron weights. Given all the sensor and mot
 
 This is a severe mutation. This mutation chooses one link to be randomly generated. By changing one link, the rest of the link's children will be removed and randomly re-generated. This means the children could be placed back with this parent link or placed with another parent link on the creature's body. However, the number of children to be re-generated can be less than what was removed. This is to mimic random mutations where a feature/trait is removed. The root link may also be selected, so the child could be completely different with no similarities, but as there is only one root link, this possibility is quite low, comparatively.
 
-![alt text](readmeImages/theFourMutations.jpeg)
-Figure 3: Four different types of mutations
+
+
+<!-- ![alt text](readmeImages/theFourMutations.jpeg) -->
+<img src="theFourMutations.jpeg" alt= “” width="400" height="800">
+Figure 4: Four different types of mutations
+
+
 
 # Results
 
