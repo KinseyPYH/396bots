@@ -158,7 +158,7 @@ Figure A-1: Collision
 
 When adding an non-root link or joint, they are generated relative to its upstream joint. Thus, when generating new links, simply using a new random position and random link size will often lead to new links being generated inside (or a part of it) other existing links. Because of relative positions, we have no knowledge of prior generated links' absolute positions. The following diagram demonstrates this issue, where the numbers on each block are the order of generation: 
 
-![alt text](readmeImages/CollidingBlocks.jpg)
+![alt text](readmeImages/CollidingBlocks.jpeg)
 Figure A-2: No information about preceding blocks causes collision
 
 To overcome this, absolute positions of each block are stored (hardcoded for root link and joint). When I create each link and block pair, the new joint's relative position to its upstream joint is calculated first. The new link's relative position is simply taken from its dimensions. The new link's absolute dimensions, though, are calculated from its parent's absolute position, the new joint's relative position, and the new link's relative position. With the absolute position of each block stored, object collision detection is now quite simple. The absolute position calculation is shown below.
