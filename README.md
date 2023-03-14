@@ -145,7 +145,6 @@ These creatures that increased fitness can be simulated with the following comma
 
 ```
 python3 simulateFromFile.py <seedNum> <creatureID>
-
 ```
 
 To run, for example, the best creature of all trials I performed, creature 4297 from Seed 9, I would run: 
