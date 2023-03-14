@@ -71,9 +71,10 @@ Figure 4: Four different types of mutations
 Each trial had 500 generations of 10 children. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
 
 ![alt text](readmeImages/newFitnessLevels.png)
+
 Figure 5: Fitness Levels of Evolved Creatures
 
-Here is a gif showing random creatures (the primordial soup) versus selected creatures: <img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/WorstvsBest.gif" alt= “” width="" height="">
+Here is a gif showing random creatures (the primordial soup) versus selected creatures: <img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/WorstvsBest.gif" alt= “” width="600" height="400">
 
 There were 4 seeds that stood out: Seeds 1, 5, 9, 11, but the best creature was from seed 9, moving -35.27 units in the x-direction. 
 
