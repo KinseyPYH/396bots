@@ -10,7 +10,7 @@ Links with and without sensors are respectively colored green and blue.
 
 
 <a name="fit"/>
-# Fitness function 
+## Fitness function 
 Each generated creature is placed in a simulation world and its fitness by the end of the simulation is recorded. 
 
 The fitness function for this creature and its ancestors is to minimise the X-coordinate by the end of the simulation. Essentially, it is maximising distance travelled in the negative X-direction. 
