@@ -58,7 +58,7 @@ This is a severe mutation. This mutation chooses one link to be randomly generat
 
 
 <!-- ![alt text](readmeImages/theFourMutations.jpeg) -->
-<img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/theFourMutations.jpeg" alt= “” width="400" height="800">
+<img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/theFourMutations.jpeg" alt= “” width="500" height="800">
 Figure 4: Four different types of mutations
 
 
