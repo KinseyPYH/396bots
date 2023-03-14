@@ -9,7 +9,7 @@ Links with and without sensors are respectively colored green and blue.
 [Fitness Function](#fit)
 
 
-<a name="fit">
+<a name="fit"/>
 # Fitness function 
 Each generated creature is placed in a simulation world and its fitness by the end of the simulation is recorded. 
 
