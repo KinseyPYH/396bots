@@ -1,4 +1,4 @@
-# CS396 Final Project
+# CS396 Final Project (Engineer)
 
 This assignment creates a program that first generates a random 3D creature with randomised motor/sensor/morphology and uses a mutation function to evolve behavior for locomotion. The program selects for the most fitting creature based on a set fitness function. 
 
