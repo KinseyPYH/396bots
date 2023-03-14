@@ -9,6 +9,11 @@ Each generated creature is placed in a simulation world and its fitness by the e
 
 The fitness function for this creature and its ancestors is to minimise the X-coordinate by the end of the simulation. Essentially, it is maximising distance travelled in the negative X-direction. 
 
+
+![alt text](readmeImages/fitnessfunction.jpeg)
+
+Figure 0: Fitness function
+
 # Body Generation
 The body is initially generated a randomly generated (shape and size) block. Then, a random series of randomly generated links (blocks) will be added to the root block and each subsequently added block. Figure 1 demonstrates the genotype and possible phenotype of a creature.
 
@@ -29,6 +34,8 @@ Figure 2: Neuron, motor, joint connections on any creature
 # Evolution
 Evolution occurs by using the parent and applying a mutation function to its body and regenerating it as the child. Then, the child will run through the simulation again and the fitness at the end is recorded. If it has travelled further (smaller X value) than its parent, it will replace the parent as the better creature to be used to evolve off of. 
 
+This program runs 500 generations with 10 parents. Each parent will have a child. As mentioned, if the child performs better, the child will become the new parent that will be the ancestor of subsequent generations. If the child performs worse, the parent remains. 
+
 # Methods: How the program mutates 
 
 The program generates a random creature of initial size [6, 12). The random body generation algorithm is detailed in Appendix A. This section details the mutation function from parent to child generation. 
@@ -48,7 +55,6 @@ Figure 3: Different possible axes
 
 This mutation function iterates through all joints in the creature's body and reassigns one of two axis randomly. They may receive the same axis or a new axis. 
 
-
 3 ) Change Neuron Weights
 
 This mutate simply randomly mutates neuron weights. Given all the sensor and motor neurons, the synapses are re-generated and are given new random values from [-1,1] and the Create_Brain() function sends these synapses to the simulator with the new weights.
@@ -56,7 +62,6 @@ This mutate simply randomly mutates neuron weights. Given all the sensor and mot
 4) One link (and its children, if any) is chosen to be mutated
 
 This is a severe mutation. This mutation chooses one link to be randomly generated. By changing one link, the rest of the link's children will be removed and randomly re-generated. This means the children could be placed back with this parent link or placed with another parent link on the creature's body. However, the number of children to be re-generated can be less than what was removed. This is to mimic random mutations where a feature/trait is removed. The root link may also be selected, so the child could be completely different with no similarities, but as there is only one root link, this possibility is quite low, comparatively.
-
 
 
 <!-- ![alt text](readmeImages/theFourMutations.jpeg) -->
@@ -68,28 +73,34 @@ Figure 4: Four different types of mutations
 
 # Results
 
-Each trial had 500 generations of 10 children. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
+Each trial had 500 generations of 10 parents. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
 
 ![alt text](readmeImages/newFitnessLevels.png)
 
 Figure 5: Fitness Levels of Evolved Creatures
 
+There were 4 seeds that stood out: Seeds 1, 5, 9, 11, but the best creature was from seed 9, moving -35.27 units in the x-direction. The resulting creatures all seemed to have the same repeated action that propelled them strictly in the negative x-direction. This makes sense, as this is a simulation with a time limit. Any movements in any direction other than the negative x-direction are wasted movements. This verifies that the selection and the fitness function work well. Due to time and computer performance issues, the trials could not be run for more than 500 generations with 10 children each. With more children, each successful mutation will have a chance of creating a better child along the lineage. Perhaps in the future, this experiment could be run with more generations with more children. 
+
+
 Here is a gif showing random creatures (the primordial soup) versus selected creatures: <img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/WorstvsBest1.gif" alt= “” width="600" height="400">
 
-There were 4 seeds that stood out: Seeds 1, 5, 9, 11, but the best creature was from seed 9, moving -35.27 units in the x-direction. 
-
-Here is a video showing each mutation that *improved* fitness for the seed 9 trial: <insert video here>
+Here is a video showing each mutation that *improves* fitness for the seed 9 trial: https://youtu.be/ks_uiRRjWQw
 
 Figure 6 is a graphic showing the differences between each mutation that improved the species' fitness levels for the seed 9 trial. 
 
 ![alt text](readmeImages/GoodMutationsSeed9.jpeg)
+
 Figure 6: Mutations that improved fitness levels of seed 9
+
+For seed 9, it seems that up until generation 40, random mutations involving link addition/removal were the mutations that increased fitness. Between Gen 56 and Gen 429, there are increases in fitness, but they are neuron changes, which did not change physical appearance. In other words, once it got to generation 56, which was the last severe mutation, the changes that improved fitness were neuron weight changes. This is interesting, yet not surprising. It seems that the physical characteristics of generation 56, ID 567, had the key to moving as far as possible, but depended on changes to the neuron weights to do so.
+
+I did, however, notice that the changes that eventually enables great improvements in fitness tended to be the severe mutation, where multiple links were removed and replaced with a possiblity of being placed elsewhere on the creature.This is not surprising, as perhaps one phenotype was doomed to begin with. However, while severe mutations are possible in nature (which was my intention: to mimic nature as much as possible), they do occur with much lower probability. If this experiment were performed again, I would decrease the probability of the severe mutation, and also give the other mutations different probabilities to occur. This would be a more realistic simulation of evolution and natural selection. Nonetheless, this experiment proved to be a success, as it was able to evolve a random robot into a creature that is able to run in a certain direction. 
+
+# Video explanation
 
 For a video explanation, see this 2-minute summary video: <insert final video>
 
-
-
-
+The first half is catered for middle schoolers. 
 
 # Running the Program
 
@@ -100,7 +111,7 @@ The creatures which increased fitness of the species of each of the 12 seeds has
 These creatures that increased fitness can be simulated with the following command: 
 
 ```
-python3 simulateFromFile.py  <seedNum> <creatureID>
+python3 simulateFromFile.py <seedNum> <creatureID>
 
 ```
 
@@ -110,20 +121,20 @@ To run, for example, the best creature of all trials I performed, creature 4297 
 python3 simulateFromFile.py 9 4297
 ```
 
-You are, however, not constrained to the trials I have saved in this repository. You can run your own trials of 500 generations, each with 10 children, with your own random seeds:
+You are, however, not constrained to the trials I have saved in this repository. You can run your own trials of 500 generations with 10 parents using your own random seeds:
 
 ```
 python3 search.py F <seedNum>
-
 ```
 
 (The F stands for do *not* run from existing pickle file)
+
+To change the number of generations and parents, go into constants.py and change the variables ```numberOfGenerations``` and ```populationSize```.
 
 I have saved pickled files from my own seeded trials. The pickle snapshots saved are the generation from which the overall fitness level of the creature increased. The pickled files are saved as seed numbers and generation numbers, which can be found inside each seed's directory. You can re-run these snapshots using the command: 
 
 ```
 python3 search.py T <seedNum> <genNum>
-
 ```
 
 
