@@ -58,7 +58,7 @@ This is a severe mutation. This mutation chooses one link to be randomly generat
 
 
 <!-- ![alt text](readmeImages/theFourMutations.jpeg) -->
-<img src="theFourMutations.jpeg" alt= “” width="400" height="800">
+<img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/theFourMutations.jpeg" alt= “” width="400" height="800">
 Figure 4: Four different types of mutations
 
 
@@ -78,7 +78,7 @@ The best creature was from seed 9, moving -35.27 units in the x-direction. Here 
 
 Figure 4 is a graphic showing the differences between each mutation that improved the species' fitness levels for the seed 9 trial. 
 
-![alt text](readmeImages/Seed9GoodMutations.jpeg)
+![alt text](readmeImages/GoodMutationsSeed9.jpeg)
 Figure 4: Mutations that improved fitness levels of seed 9
 
 For a video explanation, see this 2-minute summary video: <insert final video>
