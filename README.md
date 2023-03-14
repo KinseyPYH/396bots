@@ -71,7 +71,7 @@ Figure 4: Four different types of mutations
 
 
 
-# Results
+# Results & Analysis
 
 Each trial had 500 generations of 10 parents. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
 
@@ -94,7 +94,11 @@ Figure 6: Mutations that improved fitness levels of seed 9
 
 For seed 9, it seems that up until generation 40, random mutations involving link addition/removal were the mutations that increased fitness. Between Gen 56 and Gen 429, there are increases in fitness, but they are neuron changes, which did not change physical appearance. In other words, once it got to generation 56, which was the last severe mutation, the changes that improved fitness were neuron weight changes. This is interesting, yet not surprising. It seems that the physical characteristics of generation 56, ID 567, had the key to moving as far as possible, but depended on changes to the neuron weights to do so.
 
-I did, however, notice that the changes that eventually enables great improvements in fitness tended to be the severe mutation, where multiple links were removed and replaced with a possiblity of being placed elsewhere on the creature.This is not surprising, as perhaps one phenotype was doomed to begin with. However, while severe mutations are possible in nature (which was my intention: to mimic nature as much as possible), they do occur with much lower probability. If this experiment were performed again, I would decrease the probability of the severe mutation, and also give the other mutations different probabilities to occur. This would be a more realistic simulation of evolution and natural selection. Nonetheless, this experiment proved to be a success, as it was able to evolve a random robot into a creature that is able to run in a certain direction. 
+I wanted to figure out what mutation was the most frequent. To do so, I re-simulated the creatures that increased fitness, as I had saved these creatures' brain and body files. From this, I did notice that the changes that eventually enables great improvements in fitness tended to be the severe mutation, where multiple links were removed and replaced with a possiblity of being placed elsewhere on the creature. This is not surprising, as perhaps one phenotype was doomed to begin with. This prevented all my seeds from getting stuck in earlier stages, as it essentially reset the creature (not completely, but enough). This let it evolve towards a different direction with a cleaner slate. 
+
+It's important to note that the severe mutations were only selected for in earlier generations, when the fitness levels were not too high. This is because the severe mutations were essentially completely random additions/removals. These completely random new creatures were not selected for with incremental changes, resulting in them not being selected, as they were only slightly better than a generation 0 random creature.
+
+Furthermore, while severe mutations are possible in nature (which was my intention: to mimic nature as much as possible), they do occur with much lower probability. If this experiment were performed again, I would decrease the probability of the severe mutation, and also give the other mutations higher probabilities to occur. This would be a more realistic simulation of evolution and natural selection. Nonetheless, this experiment proved to be a success, as it was able to evolve a random robot into a creature that is able to run in a certain direction. 
 
 # Video explanation
 
