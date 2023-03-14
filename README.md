@@ -21,7 +21,9 @@ There is a range of sizes allowed for the creature: from 6 to 12. Joints between
 # Sensor and Motor Connection
 In pybullet, links can be sensors and joints can be motorised in their axis of rotation. We can utilise this to help bodies move. Each link is given a random 50-50 chance of being a sensor. Each joint is also given a 50-50 chance of being a motorised joint. The goal of this is to remove any human constructs of where to place sensors and motors and let natural selection occur. Every sensor is also connected to every neuron through a synapse. This is to mimic animal behavior (like when a limb touches something extremely hot, the entire body will move in response, or when moving forward, the left leg steps and the right leg will step in response). However, each synapse is given a different weight, so that different sensors will affect a motor more or less severely. This means that any sensor can have an affect (even negligible) on any motor and, therefore, joint. Figure 3 shows the connections made. 
 
-![alt text](readmeImages/SensorJointCon.jpeg)
+<!-- ![alt text](readmeImages/SensorJointCon.jpeg) -->
+<img src="https://github.com/KinseyPYH/396bots/blob/finalproject/readmeImages/SensorJointCon.jpeg" alt= “” width="500" height="800">
+
 Figure 2: Neuron, motor, joint connections on any creature
 
 # Evolution
