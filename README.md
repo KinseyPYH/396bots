@@ -7,14 +7,23 @@ Links with and without sensors are respectively colored green and blue.
 
 # Table of Contents
 [Fitness Function](#fit)
+
 [Body Generation](#body)
+
 [Sensor & Motor Connections](#connect)
+
 [Evolution](#evo)
+
 [Methods: How the program mutates](#methods)
+
 [Results & Analysis](#res)
+
 [2 Minute Video](#video)
+
 [Running the program](#run)
+
 [Citations](#citation)
+
 [Appendix A: How the code generates random links](#appendix)
 
 
