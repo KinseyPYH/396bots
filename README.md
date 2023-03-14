@@ -97,7 +97,7 @@ This is a severe mutation. This mutation chooses one link to be randomly generat
 Figure 4: Four different types of mutations
 
 
-<a name="res">
+<a name="res"></a>
 # Results & Analysis
 
 Each trial had 500 generations of 10 parents. Ten trials were run with numpy seeds 0-11. The fitness of the best creatures of each generation were recorded. This can be seen below in Figure 4.
