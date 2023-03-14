@@ -97,7 +97,6 @@ class SOLUTION:
         color = 'Blue'
         if randomNum > 0.5:
             color = 'Green'
-        # pyrosim.Send_Cube(name="0", pos=[0,0,height/2 + c.startHeight] , size=[length, width, height], color=self.sensorColors[0])
         linkObject = {
             "name": 0,
             "LWH": [length, width, height],
@@ -115,7 +114,6 @@ class SOLUTION:
         jointPosition = [a*b for a,b in zip(randomDirectionToGrowCoord, [length/2, width/2, height/2])]
         jointPosition[2] += height/2 + c.startHeight
         randomJointAxis = np.random.choice(jointDirections)
-        # pyrosim.Send_Joint( name = "0_1" , parent= "0" , child = "1" , type = "revolute", position = jointPosition, jointAxis = randomJointAxis)
         jointObject = {
             "name": "0_1",
             "jointPos": jointPosition, #first one is absolute, others are relative
@@ -124,7 +122,6 @@ class SOLUTION:
             "parentName": "0",
             "childName": "1"
         }
-        # self.allJoints.append(("0_1", jointPosition, np.random.rand(), randomJointAxis)) # name, relposfromparent, probability, jointAxis
         self.allJoints.append(jointObject)
         self.currentLinks.append(linkObject)
 
@@ -135,8 +132,6 @@ class SOLUTION:
         linkRelPos = [a*b for a,b in zip(randomDirectionToGrowCoord, [length/2, width/2, height/2])]
         linkAbsPos = [a+b for a,b in zip(jointPosition, linkRelPos)]
 
-        # pyrosim.Send_Cube(name="1", pos=linkRelPos , size=[length, width, height], color=self.sensorColors[1])
-        
         randomNum = np.random.rand()
         color = 'Blue'
         if randomNum > 0.5:
@@ -217,7 +212,6 @@ class SOLUTION:
                 height = np.random.rand() * c.maxSize + c.minLinkSize
                 
                 linkRelPos = [a*b for a,b in zip(randomDirectionToGrowCoord, [length/2, width/2, height/2])]
-                # print("linkabspos")
                 linkAbsPos = [a+b for a,b in zip(linkRelPos, newJointCalculatedAbsPos)]
                 collisionCheckCount += 1
                 isCollide = self.Check_Collision(randomParentLink, linkAbsPos, length, width, height, randomDirectionToGrow)
@@ -228,7 +222,6 @@ class SOLUTION:
 
             jointName = str(randomParentLink["name"]) + "_" + str(i)
             randomJointAxis = np.random.choice(jointDirections)
-            # pyrosim.Send_Joint( name = jointName , parent= str(randomParentLink["name"]) , child = str(i) , type = "revolute", position =  FromPrevJointToNewJointRelPosition, jointAxis = randomJointAxis)#"0 1 0")
             jointObject = {
                 "name": jointName,
                 "jointPos": FromPrevJointToNewJointRelPosition, #first one is absolute, others are relative
@@ -239,8 +232,6 @@ class SOLUTION:
             }
             self.allJoints.append(jointObject)
 
-            # self.allJoints.append((jointName, FromPrevJointToNewJointRelPosition, np.random.rand(), randomJointAxis, str(randomParentLink["name"]), str(i)))
-            # pyrosim.Send_Cube(name=str(i), pos=linkRelPos , size=[length, width, height], color=self.sensorColors[i])
             randomNum = np.random.rand()
             color = 'Blue'
             if randomNum > 0.5:
@@ -299,23 +290,6 @@ class SOLUTION:
             if (((abs(otherLinkAbsPos[0]-linkAbsPos[0]) - (otherLinkLWH[0]/2 + length/2)) < 0) and 
                 ((abs(otherLinkAbsPos[1]-linkAbsPos[1]) - (otherLinkLWH[1]/2 + width/2 )) < 0) and
                 ((abs(otherLinkAbsPos[2]-linkAbsPos[2]) - (otherLinkLWH[2]/2 + height/2)) < 0)):
-                # print("-----begin colide -----")
-                # print(randomDirectionToGrow)
-                # print(len(self.currentLinks))
-                # print(self.currentLinks)
-                # print("parent: " + str(parentLink['name']))
-                # print(length,width,height)
-                # print("       --- conditions ---")
-                # print((abs(otherLinkAbsPos[0]-linkAbsPos[0]) - (otherLinkLWH[0]/2 + length/2)))
-                # print((abs(otherLinkAbsPos[1]-linkAbsPos[1]) - (otherLinkLWH[1]/2 + width/2 )))
-                # print((abs(otherLinkAbsPos[2]-linkAbsPos[2]) - (otherLinkLWH[2]/2 + height/2)))
-                # print("       --- end condition ---")
-
-                # print(otherLinkAbsPos)
-                # print(linkAbsPos)
-                # print(otherLinkLWH)
-                # print([length, width, height])
-                # print("-----end colide -----")
                 return True
         return False
 
@@ -331,7 +305,6 @@ class SOLUTION:
                 sensorNeuronCount += 1 
 
 
-        # self.numSensorNeurons = sensorNeuronCount
         motorNeuronCount = 0
         for i in range(len(self.allJoints)):
             if self.allJoints[i]["chance"] > 0.5:
@@ -341,11 +314,6 @@ class SOLUTION:
                 pyrosim.Send_Motor_Neuron( name = sensorNeuronCount + motorNeuronCount , jointName =  self.allJoints[i]["name"])
                 motorNeuronCount += 1
 
-            
-        # self.numMotorNeurons = motorNeuronCount
-        # self.weights = np.random.rand(sensorNeuronCount, motorNeuronCount)
-
-        # self.weights = (self.weights * 2) - 1 
         for currentRow in range(sensorNeuronCount):
             for currentColumn in range(motorNeuronCount):
                 pyrosim.Send_Synapse( sourceNeuronName = currentRow , targetNeuronName = currentColumn + sensorNeuronCount , weight = self.weights[currentRow][currentColumn])
@@ -354,17 +322,9 @@ class SOLUTION:
     
     def Rebuild_Body(self):
 
-        # pyrosim.Start_URDF("body.urdf")
         pyrosim.Start_URDF(self.foldername + "/body" + str(self.myID) + ".urdf")
-
-        # p.loadURDF("body" + str(solutionID) + ".urdf")
-
         # U have all relative positions from parent. Simply run through that and build it.  
         pyrosim.Send_Cube(name="0", pos=self.currentLinks[0]["abs_pos"], size=self.currentLinks[0]["LWH"], color=self.currentLinks[0]['color'])
-        # pyrosim.Send_Joint( name = "0_1" , parent= "0" , child = "1" , type = "revolute", position = self.allJoints[0]["jointPos"], jointAxis = self.allJoints[0]["jointAxis"])
-        # pyrosim.Send_Cube(name="1", pos=self.currentLinks[1]["RelPosFromParent"], size=self.currentLinks[1]["LWH"], color=self.currentLinks[1]['color'])
-
-        
         for i in range(1,len(self.currentLinks)):
             currLink = self.currentLinks[i]
             nextJoint = self.allJoints[i-1]
@@ -372,20 +332,17 @@ class SOLUTION:
             pyrosim.Send_Cube(name=str(currLink['name']), pos=currLink['RelPosFromParent'], size=currLink['LWH'], color=currLink['color'])
         
         pyrosim.End()
-        # self.printLinks()
-        # pass
-
-        
 
 
     def Mutate(self):
-        # Three choices for mutation: 
+        # Four choices for mutation: 
         # 1. Change weights
         # 2. Change link
             # 1. Choose random block
             # 2. Delete all its children and all its children (and their joints)
             # 3. Regrow at that joint.
         # 3. Change n number of joints axes to the other joint axis. 
+        # 4. Add one link
         randomNum = np.random.randint(0,4)
         print("random number: " + str(randomNum) + ", ID: " + str(self.myID))
         if (randomNum == 0):
@@ -400,7 +357,7 @@ class SOLUTION:
         else:
             print("Mutate: Add one link - " + str(self.myID))
             self.MutateAddOneLink()
-        # print(self.currentLinks)
+
     def MutateAddOneLink(self):
         added = self.AddOneLink()
         while not added:
@@ -434,14 +391,12 @@ class SOLUTION:
             # randomDirectionToGrowCoord 
         if randomParentLink['name'] == self.currentLinks[0]["name"] or randomParentLink['parentJointName'] == '':  #If parent is the root.
             # Calculate Abs Joint 
-            # relJointPos = [a * (b/2) for a,b in zip(randomDirectionToGrowCoord * randomParentLWH)]
             absJointPos = [a + b for a,b in zip(randomParentLink["abs_pos"], jointRelPositionFromCenterOFParentLink)] 
             FromPrevJointToNewJointRelPosition = absJointPos
 
         ## for use when Send_Joint()    
             # go from one edge (joint) of cube to another edge (joint) through the center of cube
         else:
-            # print(randomParentLink)
             centerofParentLinkRelative = [float(a)*(b/2) for a,b in zip(directions[randomParentLink['grewToward']], randomParentLWH)]
             goToNewJointAdd= [(a/2)*float(b) for a,b in zip(randomParentLWH, directions[randomDirectionToGrow])]
             FromPrevJointToNewJointRelPosition = [a + b for a,b in zip(centerofParentLinkRelative, goToNewJointAdd)]
@@ -476,7 +431,6 @@ class SOLUTION:
             return False
 
         randomJointAxis = np.random.choice(jointDirections)
-        # pyrosim.Send_Joint( name = jointName , parent= str(randomParentLink["name"]) , child = str(i) , type = "revolute", position =  FromPrevJointToNewJointRelPosition, jointAxis = randomJointAxis)#"0 1 0")
         
         #generate link name
         linkName = 0
@@ -493,9 +447,6 @@ class SOLUTION:
 
         if not chose:
             linkName = len(self.currentLinks)
-        # if linkName == 0 or linkName == 1:
-        #     linkName = maxName + 1
-        #     maxName += 1
 
         jointName = str(randomParentLink["name"]) + "_" + str(linkName)
         
@@ -508,9 +459,6 @@ class SOLUTION:
             "childName": str(linkName)
         }
         self.allJoints.append(jointObject)
-
-        # self.allJoints.append((jointName, FromPrevJointToNewJointRelPosition, np.random.rand(), randomJointAxis, str(randomParentLink["name"]), str(i)))
-        # pyrosim.Send_Cube(name=str(i), pos=linkRelPos , size=[length, width, height], color=self.sensorColors[i])
 
         randomNum = np.random.rand()
         color = 'Blue'
@@ -540,8 +488,6 @@ class SOLUTION:
         parentLink['filled'].append(randomDirectionToGrow)
         parentLink['children'].append(linkObject)
 
-        # self.currentLinks[randomParentLink['name']]['filled'].append(randomDirectionToGrow)
-        # self.currentLinks[randomParentLink['name']]['children'].append(linkObject)
         self.currentLinks.append(linkObject)
                 # Synapse 
         sensorNeuronCount = 0
@@ -565,8 +511,6 @@ class SOLUTION:
         return True
 
     def MutateLinks(self):
-        # randomLinkIndex = np.random.randint(0,high=len(self.currentLinks))
-
         deletedLinkNames = []
         toDeleteLinks = []
         childrenLinks = [] #for BFS
@@ -617,23 +561,11 @@ class SOLUTION:
                 
 
             childrenLinks.pop(0)
-        
-        # print("MUTATE LINKS ALL JOINTS")
-        # print(self.allJoints)
-
-        # print("TO DELETE LINKS: ")
-        # print(toDeleteLinks)
-        # print("NAMES OF DELETED LINKS")
-        # print(deletedLinkNames)
-        # print("END MUTATE")
 
         for link in reversed(toDeleteLinks):
             for l in self.currentLinks:
                 if link["name"] == l["name"]:
                     self.currentLinks.remove(l)
-
-        # print("NEw links")
-        # print(self.currentLinks)
 
         maxName = self.currentLinks[0]["name"]
         for i in range(len(self.currentLinks)):
@@ -664,10 +596,6 @@ class SOLUTION:
             ## For use to calculate new link absolute postiion
             jointRelPositionFromCenterOFParentLink = [a*b for a,b in zip(randomDirectionToGrowCoord, [length/2, width/2, height/2])]
 
-            # if randomParentLink['parentJointName'] == '':
-            #     print("Muate Links")
-            #     print("Root")
-            #     continue
 
             FromPrevJointToNewJointRelPosition = None
 
@@ -705,7 +633,6 @@ class SOLUTION:
                 height = np.random.rand() * c.maxSize + c.minLinkSize
                 
                 linkRelPos = [a*b for a,b in zip(randomDirectionToGrowCoord, [length/2, width/2, height/2])]
-                # print("linkabspos")
                 linkAbsPos = [a+b for a,b in zip(linkRelPos, newJointCalculatedAbsPos)]
                 collisionCheckCount += 1
                 isCollide = self.Check_Collision(randomParentLink, linkAbsPos, length, width, height, randomDirectionToGrow)
@@ -715,7 +642,6 @@ class SOLUTION:
                 continue
 
             randomJointAxis = np.random.choice(jointDirections)
-            # pyrosim.Send_Joint( name = jointName , parent= str(randomParentLink["name"]) , child = str(i) , type = "revolute", position =  FromPrevJointToNewJointRelPosition, jointAxis = randomJointAxis)#"0 1 0")
             
             #generate link name
             linkName = 0
@@ -732,9 +658,7 @@ class SOLUTION:
                     linkName = j
                     chose = True
                     break
-            # if linkName == 0 or linkName == 1:
-            #     linkName = maxName + 1
-            #     maxName += 1
+
             if not chose:
                 linkName = len(self.currentLinks)
 
@@ -749,9 +673,6 @@ class SOLUTION:
                 "childName": str(linkName)
             }
             self.allJoints.append(jointObject)
-
-            # self.allJoints.append((jointName, FromPrevJointToNewJointRelPosition, np.random.rand(), randomJointAxis, str(randomParentLink["name"]), str(i)))
-            # pyrosim.Send_Cube(name=str(i), pos=linkRelPos , size=[length, width, height], color=self.sensorColors[i])
 
             randomNum = np.random.rand()
             color = 'Blue'
@@ -781,8 +702,6 @@ class SOLUTION:
             parentLink['filled'].append(randomDirectionToGrow)
             parentLink['children'].append(linkObject)
 
-            # self.currentLinks[randomParentLink['name']]['filled'].append(randomDirectionToGrow)
-            # self.currentLinks[randomParentLink['name']]['children'].append(linkObject)
             self.currentLinks.append(linkObject)
 
             i+=1
@@ -816,8 +735,7 @@ class SOLUTION:
     def ChangeWeights(self):
         numSensorNeurons =  self.numSensorNeurons - 1
         numMotorNeurons = self.numMotorNeurons - 1
-        # print(numSensorNeurons)
-        # print(numMotorNeurons)
+
         if (self.numSensorNeurons == 1):
             numSensorNeurons = 1
         if (self.numMotorNeurons == 1):
@@ -826,10 +744,7 @@ class SOLUTION:
         for i in range(3):
             randomRow = np.random.randint(0, high=numSensorNeurons)
             randomColumn = np.random.randint(0,high=numMotorNeurons)
-        # print(randomRow)
-        # print(randomColumn)
-        # print(self.weights)
-        # print(self.weights[0][0])
+
             self.weights[randomRow][randomColumn] = (np.random.rand() * 2) - 1
 
     def Set_ID(self, nextAvailableID):

@@ -5,8 +5,8 @@ numIterations = 5000
 t = 1/1000
 
 # HillClimber parameters
-numberOfGenerations = 500
-populationSize = 10
+numberOfGenerations = 3
+populationSize = 5
 
 length = 1
 width = 1

@@ -98,7 +98,7 @@ I did, however, notice that the changes that eventually enables great improvemen
 
 # Video explanation
 
-For a video explanation, see this 2-minute summary video: <insert final video>
+For a video explanation, see this 2-minute summary video: https://youtu.be/XlnfSwap6eM
 
 The first half is catered for middle schoolers. 
 
@@ -106,7 +106,7 @@ The first half is catered for middle schoolers.
 
 The main file is search.py. I exclusively used python3 for this project. 
 
-The creatures which increased fitness of the species of each of the 12 seeds has been saved in the directories seed0 to seed11 in this repository. The generation number and ID number of these creatures is recorded in the files increasesInFitness<seedNum>.txt
+The creatures which increased fitness of the species of each of the 12 seeds has been saved in the directories seed0 to seed11 in this repository. The generation number and ID number of these creatures is recorded in the files increasesInFitness< seedNum >.txt
 
 These creatures that increased fitness can be simulated with the following command: 
 

@@ -1,0 +1,13 @@
+Fitness: -4.191731711913251 generation: 0 ID: 8
+Fitness: -4.411803514106772 generation: 3 ID: 33
+Fitness: -5.970938836180632 generation: 4 ID: 43
+Fitness: -9.036486005012693 generation: 15 ID: 151
+Fitness: -11.78085262792705 generation: 40 ID: 403
+Fitness: -12.17216081037567 generation: 56 ID: 567
+Fitness: -21.17262481405444 generation: 77 ID: 777
+Fitness: -33.88883579035978 generation: 85 ID: 857
+Fitness: -35.274676869754245 generation: 161 ID: 1617
+Fitness: -35.63513136692112 generation: 429 ID: 4297
+
+
+
